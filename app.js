@@ -1,6 +1,3 @@
-// Basic in-memory user data for testing
-let users = JSON.parse(localStorage.getItem('users')) || {};
-
 // DOM Elements
 const loginScreen = document.getElementById('login-screen');
 const desktop = document.getElementById('desktop');
@@ -12,14 +9,19 @@ const uploadBtn = document.getElementById('upload-btn');
 const downloadBtn = document.getElementById('download-btn');
 const logoutBtn = document.getElementById('logout-btn');
 
-// Simulating a login system with password management
+// Basic in-memory user data for testing
+let users = JSON.parse(localStorage.getItem('users')) || {};
+
+// Fix for login button not working
 loginForm.addEventListener('submit', function (e) {
-    e.preventDefault();
+    e.preventDefault();  // Prevent the default form submission
+
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
 
+    // Check if user exists and password matches
     if (users[username] && users[username] === password) {
-        showDesktop();
+        showDesktop();  // Show desktop if login is successful
     } else {
         errorMessage.textContent = 'Invalid username or password!';
     }
